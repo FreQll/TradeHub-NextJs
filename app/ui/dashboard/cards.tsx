@@ -5,6 +5,7 @@ import {
   ClipboardDocumentIcon,
 } from '@heroicons/react/24/outline';
 import { rubik } from '@/app/ui/fonts';
+import { fetchCardData } from '@/app/lib/data';
 
 const iconMap = {
   earned: BanknotesIcon,
@@ -14,14 +15,22 @@ const iconMap = {
 };
 
 export default async function CardWrapper() {
+  const cardData = await fetchCardData();
+  const {
+    numberOfSellers,
+    numberOfInvoices,
+    totalFulfilledInvoices,
+    totalAwaitingInvoices,
+  } = cardData;
+
   return (
     <>
       {/* Attention! Uncomment this section when you reach this stage in the course. */}
 
-      {/* <Card title="Earned" value={totalFulfilledInvoices} type="earned" />
+      <Card title="Earned" value={totalFulfilledInvoices} type="earned" />
       <Card title="In Progress" value={totalAwaitingInvoices} type="awaiting" />
       <Card title="All Invoices" value={numberOfInvoices} type="invoices" />
-      <Card title="Total Sellers" value={numberOfSellers} type="sellers" /> */}
+      <Card title="Total Sellers" value={numberOfSellers} type="sellers" />
     </>
   );
 }
